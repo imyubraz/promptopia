@@ -1,9 +1,10 @@
-import React from 'react'
+// import React from 'react'
+    // No longer need to import react in Next.js 13
 
-const page = () => {
+const Home = () => {
   return (
-    <div>Hello World!</div>
+    <div>Hello World!!</div>
   )
 }
 
-export default page
+export default Home
