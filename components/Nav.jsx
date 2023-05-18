@@ -11,7 +11,9 @@ import {signIn, signOut, useSession, getProviders} from "next-auth/react";
   // Auth tools provided by Next.js
 
 const Nav = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const {data: session} = useSession();
+  // const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [providers, setProviders] = useState(null);
 
   const [toogleDropdown, setToogleDropdown] = useState(false);
@@ -23,13 +25,14 @@ const Nav = () => {
  */
 
   useEffect(()=>{
-    const setProviders = async() =>{
+    const setUpProviders = async() =>{
+      // alert("jj");
       const response = await getProviders();
         // getting providers data from next-auth
-
       setProviders(response);
+      alert(response);
     }
-    setProviders();
+    setUpProviders();
       // ???? why ??
   }, [])
 
@@ -53,7 +56,8 @@ const Nav = () => {
 
       {/* Desktop navigation */}
       <div className="hidden sm:flex">
-        { isLoggedIn? 
+        {/* { isLoggedIn?  */}
+        { session?.user ? 
         (
           <div className="p-2 flex gap-3 md:gap-5">
             <Link href={`/create-prompt`} className='black_btn'>Create Post</Link>
@@ -94,7 +98,8 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       <div className="flex sm:hidden relative">
-        { isLoggedIn? 
+        {/* { isLoggedIn?  */}
+        { session?.user ? 
         (
           <div className="flex justify-between">
             <Image
